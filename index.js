@@ -24,8 +24,8 @@ app.get("/api/:date?", function (req, res){
     //if no parameter is assigned
     if( dateString === undefined){
         res.json({
-            unix: new Date(),
-            utc: new Date().toString()
+            unix: new Date().getTime(),
+            utc: new Date().toUTCString()
         })
     }
 
@@ -35,12 +35,11 @@ app.get("/api/:date?", function (req, res){
         var dateNum = parseInt(dateString);
         res.json({
             unix: dateNum,
-            utc: new Date(dateNum).toString()
+            utc: new Date(dateNum).toUTCString()
         })
     } else {
         
         var dateObject = new Date(dateString);
-        console.log(dateObject)
         if( dateObject.toString() === "Invalid Date"){
             res.json({
                 error: "Invalid Date"
@@ -49,7 +48,7 @@ app.get("/api/:date?", function (req, res){
             var dateInt = new Date(dateString);
             res.json({
                 unix: new Date(dateString).getTime(),
-                utc: new Date(dateInt).toString()
+                utc: new Date(dateInt).toUTCString()
             })
         }
     }
